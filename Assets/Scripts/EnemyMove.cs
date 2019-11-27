@@ -12,35 +12,59 @@ public class EnemyMove : MonoBehaviour
     public float leftEdge;
     public float rightEdge;
 
-    static private int moveRight;
+    private List<GameObject> enemies = new List<GameObject>();
+
+    static private int moveDirection = 1; // Either 1 (right) or -1 (left)
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < leftEdge || transform.position.x > rightEdge)   
+
+        foreach (var enemy in enemies)
         {
-            changeDirection();
+            var worldToScreen = Camera.main.WorldToViewportPoint(enemy.transform.position);
+            if (worldToScreen.x < leftEdge)
+            {
+                changeDirection(1);
+                Debug.Log("Moved Right: " + enemy.name);
+            }
+            if (worldToScreen.x > rightEdge)
+            {
+                changeDirection(-1);
+                Debug.Log("Moved Left: " + enemy.name);
+            }
         }
 
-        
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(speed * moveRight, 0);
+        if (GameHandler.paused != true)
+        {
+            rb.velocity = new Vector2(speed * moveDirection, 0);
+        }
     }
 
-    void changeDirection()
+    void changeDirection(int direction)
     {
-        moveRight = moveRight * -1;
-        speed = speed * speedMult;
         transform.position = new Vector2(transform.position.x, transform.position.y - moveDownAmount);
+
+        moveDirection = direction;
+
+        if (speed <= 100)
+        {
+            speed = speed * speedMult;
+        }
+
     }
 }
