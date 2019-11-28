@@ -18,7 +18,6 @@ public class EnemyDie : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("Executed Die Script");
         transform.parent.GetComponent<EnemyMove>().RemoveEnemy(this.gameObject);
         GameHandler.EnemyKilled();
         Destroy(this.gameObject);

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
@@ -23,19 +24,20 @@ public class GameHandler : MonoBehaviour
     private int enemiesInWave;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        SpawnWave(currentWave);
-    }
+    void Start() { }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (enemiesKilled >= enemiesInWave)
+        if (currentWave > waves.Length)
         {
+            Win();
+        }
+
+        if (enemiesKilled >= enemiesInWave && !paused)
+        {
+            StartCoroutine(SpawnWave(currentWave));
             currentWave++;
-            SpawnWave(currentWave);
         }
 
         if (health <= 0)
@@ -62,24 +64,39 @@ public class GameHandler : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    void NextWave()
+    void Win()
     {
 
     }
 
-    void SpawnWave(int waveNum)
+    IEnumerator SpawnWave(int waveNum)
     {
+
+        paused = true;
+
+        var waveSeq = WaveText.NewWave(waveNum + 1);
+
+        yield return waveSeq.WaitForCompletion();
+
+        paused = false;
+
         foreach (var spawnPoint in waves[waveNum].GetComponentsInChildren<Transform>())
         {
-            if (spawnPoint.name == "bike")
+            if (spawnPoint != null)
             {
-                Instantiate(bikeEnemy, spawnPoint.transform.position, Quaternion.identity, enemyHandler);
-                enemiesInWave++;
-            }
-            if (spawnPoint.name == "car")
-            {
-                Instantiate(carEnemy, spawnPoint.transform.position, Quaternion.identity, enemyHandler);
-                enemiesInWave++;
+                var spawnTrans = spawnPoint.transform;
+                if (spawnPoint.name == "bike")
+                {
+                    var e = Instantiate(bikeEnemy, new Vector2(spawnTrans.position.x, spawnTrans.position.y + 10), Quaternion.identity, enemyHandler);
+                    e.GetComponent<EnemyTween>().MoveToPosition(spawnTrans.position);
+                    enemiesInWave++;
+                }
+                if (spawnPoint.name == "car")
+                {
+                    var e = Instantiate(carEnemy, new Vector2(spawnTrans.position.x, spawnTrans.position.y + 10), Quaternion.identity, enemyHandler);
+                    e.GetComponent<EnemyTween>().MoveToPosition(spawnTrans.position);
+                    enemiesInWave++;
+                }
             }
         }
 

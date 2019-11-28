@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -30,6 +31,8 @@ public class PlayerMove : MonoBehaviour
         {
             movement = new Vector2(0, 0);
         }
+
+    
 
         var worldToScreen = Camera.main.WorldToViewportPoint(transform.position);
         worldToScreen.x = Mathf.Clamp(worldToScreen.x, leftEdge, rightEdge);

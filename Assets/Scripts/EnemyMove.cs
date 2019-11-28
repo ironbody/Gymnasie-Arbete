@@ -12,7 +12,7 @@ public class EnemyMove : MonoBehaviour
     public float leftEdge;
     public float rightEdge;
 
-    private List<GameObject> enemies = new List<GameObject>();
+    private static List<GameObject> enemies = new List<GameObject>();
 
     static private int moveDirection = 1; // Either 1 (right) or -1 (left)
     private Rigidbody2D rb;
@@ -34,15 +34,16 @@ public class EnemyMove : MonoBehaviour
             if (enemy != null)
             {
                 var worldToScreen = Camera.main.WorldToViewportPoint(enemy.transform.position);
+                Debug.Log(worldToScreen);
                 if (worldToScreen.x < leftEdge)
                 {
                     changeDirection(1);
-                    // Debug.Log("Moved Right: " + enemy.name);
+                    Debug.Log("Moved Right: " + enemy.name);
                 }
                 if (worldToScreen.x > rightEdge)
                 {
                     changeDirection(-1);
-                    // Debug.Log("Moved Left: " + enemy.name);
+                    Debug.Log("Moved Left: " + enemy.name);
                 }
             }
         }
@@ -76,8 +77,16 @@ public class EnemyMove : MonoBehaviour
     {
         if (enemies.Contains(e))
         {
-            Debug.Log("Removed enemy");
             enemies.Remove(e);
+
+        }
+    }
+
+    public static void AddEnemy(GameObject e)
+    {
+        if (!enemies.Contains(e))
+        {
+            enemies.Add(e);
 
         }
     }

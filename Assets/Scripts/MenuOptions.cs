@@ -19,4 +19,20 @@ public class MenuOptions : MonoBehaviour
     {
 
     }
+
+    public void Quit()
+    {
+
+    }
+
+    public void Retry()
+    {
+
+    }
+
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        GameHandler.paused = false;
+    }
 }

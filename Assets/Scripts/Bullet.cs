@@ -27,18 +27,16 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(other.transform.tag);
-        Debug.Log(other.transform.name);
+        
 
         if (other.transform.tag == "Enemy")
         {
-            Debug.Log("Collided with enemy");
             other.gameObject.GetComponent<EnemyDie>().Die();
             Destroy(this.gameObject);
         }
         if (other.transform.tag == "Player")
         {
-            
+
             other.gameObject.GetComponent<PlayerDie>().Die();
         }
         else

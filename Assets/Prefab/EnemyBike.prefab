@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2016808124166334682}
   - component: {fileID: 273606782984565007}
   - component: {fileID: 2016808124166334683}
+  - component: {fileID: 874432304973589909}
   m_Layer: 8
   m_Name: EnemyBike
   m_TagString: Enemy
@@ -160,6 +161,19 @@ MonoBehaviour:
   bullet: {fileID: 8071036873889802153, guid: 278cf7ef9aedbf5418cbd806a766a03d, type: 3}
   shootPos: {fileID: 2016808124681868822}
   waitTime: 1.2
+--- !u!114 &874432304973589909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016808124166334631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77a32bc6bb7677448bb13084fc70c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1.4
 --- !u!1 &2016808124681868823
 GameObject:
   m_ObjectHideFlags: 0
