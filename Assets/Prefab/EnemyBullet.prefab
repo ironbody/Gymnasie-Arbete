@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 6562397584535589285, guid: 60c8c761ad29cac47a9bcce12f370736,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3377194387088958835, guid: 60c8c761ad29cac47a9bcce12f370736,
         type: 3}
       propertyPath: speed

@@ -11,7 +11,6 @@ public class EnemyShoot : MonoBehaviour
 
     private float nextTimeToFire;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +20,13 @@ public class EnemyShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= nextTimeToFire)
+        if (GameHandler.paused == false)
         {
-            nextTimeToFire = Time.time + waitTime;
-            Shoot();
+            if (Time.time >= nextTimeToFire)
+            {
+                nextTimeToFire = Time.time + waitTime;
+                Shoot();
+            }
         }
     }
 

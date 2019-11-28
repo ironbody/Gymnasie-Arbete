@@ -2,26 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDie : MonoBehaviour
+public class MenuOptions : MonoBehaviour
 {
 
-    public GameObject explosion;
+    public GameObject pauseMenu;
+    public GameObject loseMenu;
 
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-    }
-
-    public void Die()
-    {
-        Destroy(this.gameObject);
-        GameHandler.HurtPlayer();
-    
     }
 }

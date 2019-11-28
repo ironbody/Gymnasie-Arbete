@@ -22,7 +22,6 @@ public class EnemyMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
     }
 
@@ -32,39 +31,54 @@ public class EnemyMove : MonoBehaviour
 
         foreach (var enemy in enemies)
         {
-            var worldToScreen = Camera.main.WorldToViewportPoint(enemy.transform.position);
-            if (worldToScreen.x < leftEdge)
+            if (enemy != null)
             {
-                changeDirection(1);
-                Debug.Log("Moved Right: " + enemy.name);
-            }
-            if (worldToScreen.x > rightEdge)
-            {
-                changeDirection(-1);
-                Debug.Log("Moved Left: " + enemy.name);
+                var worldToScreen = Camera.main.WorldToViewportPoint(enemy.transform.position);
+                if (worldToScreen.x < leftEdge)
+                {
+                    changeDirection(1);
+                    // Debug.Log("Moved Right: " + enemy.name);
+                }
+                if (worldToScreen.x > rightEdge)
+                {
+                    changeDirection(-1);
+                    // Debug.Log("Moved Left: " + enemy.name);
+                }
             }
         }
 
+        // Debug.Log(rb.velocity.y);
     }
 
     private void FixedUpdate()
     {
-        if (GameHandler.paused != true)
+        if (GameHandler.paused == false)
         {
             rb.velocity = new Vector2(speed * moveDirection, 0);
+
         }
     }
 
     void changeDirection(int direction)
     {
-        transform.position = new Vector2(transform.position.x, transform.position.y - moveDownAmount);
+        transform.position = new Vector2(transform.position.x, transform.position.y - (moveDownAmount / 6));
 
         moveDirection = direction;
 
-        if (speed <= 100)
+        if (speed <= 10)
         {
             speed = speed * speedMult;
         }
 
+    }
+
+    public void RemoveEnemy(GameObject e)
+    {
+        if (enemies.Contains(e))
+        {
+            Debug.Log("Removed enemy");
+            enemies.Remove(e);
+
+        }
     }
 }
