@@ -19,66 +19,103 @@ public class GameHandler : MonoBehaviour
 
     public GameObject carEnemy;
 
+    public GameObject pauseMenu;
+    public GameObject loseMenu;
+    public GameObject winMenu;
+
     private static int enemiesKilled;
 
     private int enemiesInWave;
 
+    private bool lost;
+    private bool won;
+    public static bool spawningWave;
+
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        lost = false;
+        paused = false;
+        won = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log(currentWave + " " + waves.Length + "; " + enemiesKilled + " " + enemiesInWave + "; " + currentWave);
         if (currentWave > waves.Length)
         {
             Win();
         }
 
-        if (enemiesKilled >= enemiesInWave && !paused)
+        if (enemiesKilled >= enemiesInWave && !paused && !spawningWave)
         {
-            StartCoroutine(SpawnWave(currentWave));
             currentWave++;
+            StartCoroutine(SpawnWave(currentWave - 1));
+
         }
 
         if (health <= 0)
         {
             Lose();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !lost && !won)
+        {
+            if (paused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+
     }
 
-    public static void Pause()
+    public void Pause()
     {
         paused = true;
         Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+
     }
 
-    public static void Lose()
-    {
-        paused = true;
-        Time.timeScale = 0f;
-    }
-
-    public static void Resume()
+    public void Resume()
     {
         paused = false;
         Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
     }
 
-    void Win()
+    public void Lose()
     {
+        paused = true;
+        lost = true;
+        Time.timeScale = 0f;
+        loseMenu.SetActive(true);
+    }
 
+    public void Win()
+    {
+        paused = true;
+        Time.timeScale = 0f;
+        winMenu.SetActive(true);
+        print("Won!");
     }
 
     IEnumerator SpawnWave(int waveNum)
     {
 
-        paused = true;
+        spawningWave = true;
+        enemiesKilled = 0;
+        enemiesInWave = 0;
 
         var waveSeq = WaveText.NewWave(waveNum + 1);
 
         yield return waveSeq.WaitForCompletion();
-
-        paused = false;
 
         foreach (var spawnPoint in waves[waveNum].GetComponentsInChildren<Transform>())
         {
@@ -99,6 +136,7 @@ public class GameHandler : MonoBehaviour
                 }
             }
         }
+        spawningWave = false;
 
     }
 

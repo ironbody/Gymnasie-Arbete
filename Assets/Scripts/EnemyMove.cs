@@ -34,16 +34,16 @@ public class EnemyMove : MonoBehaviour
             if (enemy != null)
             {
                 var worldToScreen = Camera.main.WorldToViewportPoint(enemy.transform.position);
-                Debug.Log(worldToScreen);
+                // Debug.Log(worldToScreen);
                 if (worldToScreen.x < leftEdge)
                 {
                     changeDirection(1);
-                    Debug.Log("Moved Right: " + enemy.name);
+                    // Debug.Log("Moved Right: " + enemy.name);
                 }
                 if (worldToScreen.x > rightEdge)
                 {
                     changeDirection(-1);
-                    Debug.Log("Moved Left: " + enemy.name);
+                    // Debug.Log("Moved Left: " + enemy.name);
                 }
             }
         }

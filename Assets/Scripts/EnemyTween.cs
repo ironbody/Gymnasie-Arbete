@@ -15,9 +15,7 @@ public class EnemyTween : MonoBehaviour
 
     IEnumerator MoveEnumerator(Vector2 position)
     {
-        GameHandler.paused = true;
         Tween moveTween = transform.DOMove(position, duration, false);
         yield return moveTween.WaitForCompletion();
-        GameHandler.paused = false;
     }
 }

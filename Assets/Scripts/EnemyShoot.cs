@@ -20,7 +20,7 @@ public class EnemyShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameHandler.paused == false)
+        if (!GameHandler.paused && !GameHandler.spawningWave)
         {
             if (Time.time >= nextTimeToFire)
             {
