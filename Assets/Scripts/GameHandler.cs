@@ -37,23 +37,29 @@ public class GameHandler : MonoBehaviour
 
     private List<GameObject> hearts;
 
+    private AudioManager audioManager;
+
+    private bool invulnerable = false;
+    public float invulnerableTime;
+    private float lastHit;
+
     // Start is called before the first frame update
     void Start()
     {
         lost = false;
         paused = false;
         won = false;
+        currentWave = 0;
+        Resume();
 
         hearts = new List<GameObject>();
-
-        SetHearts(health);
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        // Debug.Log(currentWave + " " + waves.Length + "; " + enemiesKilled + " " + enemiesInWave + "; " + currentWave);
         if (currentWave > waves.Length)
         {
             Win();
@@ -80,6 +86,14 @@ public class GameHandler : MonoBehaviour
             else
             {
                 Pause();
+            }
+        }
+
+        if (invulnerable)
+        {
+            if (Time.time > lastHit + invulnerableTime)
+            {
+                invulnerable = false;
             }
         }
 
@@ -113,7 +127,6 @@ public class GameHandler : MonoBehaviour
         paused = true;
         Time.timeScale = 0f;
         winMenu.SetActive(true);
-        print("Won!");
     }
 
     IEnumerator SpawnWave(int waveNum)
@@ -122,6 +135,8 @@ public class GameHandler : MonoBehaviour
         spawningWave = true;
         enemiesKilled = 0;
         enemiesInWave = 0;
+
+        SetHearts(3);
 
         var waveSeq = WaveText.NewWave(waveNum + 1);
 
@@ -152,15 +167,18 @@ public class GameHandler : MonoBehaviour
 
     private void SetHearts(int num)
     {
-        for (int i = 0; i < num; i++)
+        var remainingHealth = hearts.Count;
+
+        for (int i = 0; i < num - remainingHealth; i++)
         {
             GameObject h = Instantiate(heart, heartsParent.transform);
             RectTransform hTrans = h.gameObject.GetComponent<RectTransform>();
 
-            hTrans.anchoredPosition = new Vector2(30 + (30 * i), 580);
-            Debug.Log(h);
+            hTrans.anchoredPosition = new Vector2(-120 + (30 * i), 250);
             hearts.Add(h);
         }
+
+        health = num;
     }
 
     private void RemoveHeart()
@@ -176,9 +194,14 @@ public class GameHandler : MonoBehaviour
 
     public void HurtPlayer()
     {
+        if (invulnerable)
+        {
+            return;
+        }
+        lastHit = Time.time;
         health--;
         RemoveHeart();
+        invulnerable = true;
     }
-
 
 }

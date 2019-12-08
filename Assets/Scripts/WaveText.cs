@@ -25,6 +25,9 @@ public class WaveText : MonoBehaviour
         waveSeq.Append(rectTrans.DOAnchorPosX(0, 2f, false));
         waveSeq.Append(rectTrans.DOAnchorPosX(-300, 2f, false));
         waveSeq.PrependInterval(1.5f);
+        rectTrans.anchoredPosition = new Vector2(300f, 0f);
+
+        // rectTrans.anchoredPosition.x = 300f;
 
         return waveSeq;
     }

@@ -12,7 +12,7 @@ public class MenuOptions : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Retry()

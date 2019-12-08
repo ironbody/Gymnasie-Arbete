@@ -9,9 +9,24 @@ public class AudioManager : MonoBehaviour
     // Lista med Sound typer
     public List<Sound> sounds;
 
+    public static AudioManager instance;
+
     //Awake så att allting initieras innan spelet bärjar
     private void Awake()
     {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            print("Destroyed AudioManger");
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
 
         // För varje sound i sounds: 
         // lägg till en AudioSource component och gör AudioSourcens clip, volume, pitch 
@@ -22,6 +37,7 @@ public class AudioManager : MonoBehaviour
             sound.source.clip = sound.clip;
             sound.source.volume = sound.volume;
             sound.source.pitch = sound.pitch;
+            sound.source.loop = sound.loop;
         }
     }
 
@@ -30,9 +46,24 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = sounds.Find(sound => sound.name.Contains(name));
 
-        if (s != null)
+        if (s == null)
         {
-            s.source.Play();
+            print($"Could not play sound: {name} not found");
+            return;
         }
+        s.source.Play();
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = sounds.Find(sound => sound.name.Contains(name));
+
+        if (s == null)
+        {
+            print($"Could not stop sound: {name} not found");
+            return;
+        }
+
+        s.source.Stop();
     }
 }

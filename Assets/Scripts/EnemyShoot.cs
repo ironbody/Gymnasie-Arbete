@@ -8,13 +8,18 @@ public class EnemyShoot : MonoBehaviour
     public GameObject bullet;
     public Transform shootPos;
     public float waitTime;
+    public string soundName;
 
     private float nextTimeToFire;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
         EnemyMove.AddEnemy(this.gameObject);
+  
+
     }
 
     // Update is called once per frame

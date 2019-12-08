@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
     private Vector2 movement;
     private Vector3 worldToScreen;
 
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +33,6 @@ public class PlayerMove : MonoBehaviour
         {
             movement = new Vector2(0, 0);
         }
-
-    
 
         var worldToScreen = Camera.main.WorldToViewportPoint(transform.position);
         worldToScreen.x = Mathf.Clamp(worldToScreen.x, leftEdge, rightEdge);

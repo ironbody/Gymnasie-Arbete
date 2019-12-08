@@ -7,9 +7,12 @@ public class Bomb : MonoBehaviour
 {
 
     public GameObject explosion;
+
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         StartCoroutine(DoIt());
     }
 
@@ -21,7 +24,7 @@ public class Bomb : MonoBehaviour
 
     IEnumerator DoIt()
     {
-        Tween moveTween = transform.DOMoveY(transform.position.y - 10, 2.5f, false);
+        Tween moveTween = transform.DOMoveY(player.transform.position.y, 2.5f, false);
 
         yield return moveTween.WaitForCompletion();
 

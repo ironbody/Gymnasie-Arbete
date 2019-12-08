@@ -18,6 +18,8 @@ public class Sound
     [Range(0f, 4f)]
     public float pitch;
 
+    public bool loop;
+
     // AudioSource komponenten i unity som används när man ska spela ett ljud
     [HideInInspector]
     public AudioSource source;
