@@ -7,11 +7,11 @@ public class Explosion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.5f, Vector2.zero);
-        
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1.5f, Vector2.zero);
+
         if (hit != false && hit.transform.tag == "Player")
         {
-            hit.transform.GetComponent<PlayerDie>().Die();
+            GameObject.Find("Game Handler").GetComponent<GameHandler>().HurtPlayer();
         }
         Destroy(this.gameObject, 1f);
     }

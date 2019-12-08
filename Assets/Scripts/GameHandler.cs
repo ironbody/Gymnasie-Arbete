@@ -9,7 +9,7 @@ public class GameHandler : MonoBehaviour
 
     public static int currentWave = 0;
 
-    public static int health = 3;
+    public int health = 3;
 
     public Transform enemyHandler;
 
@@ -31,19 +31,29 @@ public class GameHandler : MonoBehaviour
     private bool won;
     public static bool spawningWave;
 
+    public GameObject heart;
+
+    public GameObject heartsParent;
+
+    private List<GameObject> hearts;
+
     // Start is called before the first frame update
     void Start()
     {
         lost = false;
         paused = false;
         won = false;
+
+        hearts = new List<GameObject>();
+
+        SetHearts(health);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        Debug.Log(currentWave + " " + waves.Length + "; " + enemiesKilled + " " + enemiesInWave + "; " + currentWave);
+        // Debug.Log(currentWave + " " + waves.Length + "; " + enemiesKilled + " " + enemiesInWave + "; " + currentWave);
         if (currentWave > waves.Length)
         {
             Win();
@@ -140,13 +150,35 @@ public class GameHandler : MonoBehaviour
 
     }
 
+    private void SetHearts(int num)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            GameObject h = Instantiate(heart, heartsParent.transform);
+            RectTransform hTrans = h.gameObject.GetComponent<RectTransform>();
+
+            hTrans.anchoredPosition = new Vector2(30 + (30 * i), 580);
+            Debug.Log(h);
+            hearts.Add(h);
+        }
+    }
+
+    private void RemoveHeart()
+    {
+        Destroy(hearts[hearts.Count - 1]);
+        hearts.RemoveAt(hearts.Count - 1);
+    }
+
     public static void EnemyKilled()
     {
         enemiesKilled++;
     }
 
-    public static void HurtPlayer()
+    public void HurtPlayer()
     {
         health--;
+        RemoveHeart();
     }
+
+
 }

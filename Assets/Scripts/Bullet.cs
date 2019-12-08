@@ -36,8 +36,8 @@ public class Bullet : MonoBehaviour
         }
         if (other.transform.tag == "Player")
         {
-
-            other.gameObject.GetComponent<PlayerDie>().Die();
+            Destroy(this.gameObject);
+            GameObject.Find("Game Handler").GetComponent<GameHandler>().HurtPlayer();
         }
         else
         {

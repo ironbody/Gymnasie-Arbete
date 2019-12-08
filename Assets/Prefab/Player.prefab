@@ -41,10 +41,10 @@ GameObject:
   - component: {fileID: 836006064590864978}
   - component: {fileID: 836006064590864977}
   - component: {fileID: 836006064590864983}
+  - component: {fileID: 1351606242430643846}
   - component: {fileID: 4113355216768404365}
   - component: {fileID: 836006064590864976}
   - component: {fileID: 836006064590864979}
-  - component: {fileID: 1351606242430643846}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -138,6 +138,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
+--- !u!61 &1351606242430643846
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836006064590864982}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000000029802322, y: 0.00823307}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5389524, y: 0.72007847}
+  m_EdgeRadius: 0
 --- !u!95 &4113355216768404365
 Animator:
   serializedVersion: 3
@@ -185,31 +211,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 6562397584535589285, guid: 60c8c761ad29cac47a9bcce12f370736, type: 3}
-  fireRate: 5
+  fireRate: 2
   shootPos: {fileID: 836006064458157223}
---- !u!61 &1351606242430643846
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836006064590864982}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.000000029802322, y: 0.00823307}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5389524, y: 0.72007847}
-  m_EdgeRadius: 0
