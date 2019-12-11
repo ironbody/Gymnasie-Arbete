@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Unity WebGL Player | Gymnasie-Arbete</title>
     <script src="Build/UnityLoader.js"></script>
     <script>
-      UnityLoader.instantiate("unityContainer", "Build/build 6 (higly likely to be final).json");
+      UnityLoader.instantiate(
+        "unityContainer",
+        "Build/build 6 (higly likely to be final).json"
+      );
     </script>
   </head>
   <body>
-    <div id="unityContainer" style="width: 300px; height: 600px; margin: auto"></div>
+    <div
+      id="unityContainer"
+      style="width: 300px; height: 600px; margin: auto"
+    ></div>
+    <div id="controls">
+      <p>A & D or Left & Right Arrows = Move Left or Right</p>
+      <p>Spacebar = Shoot</p>
+    </div>
   </body>
 </html>
