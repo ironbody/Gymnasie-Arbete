@@ -90,4 +90,9 @@ public class EnemyMove : MonoBehaviour
 
         }
     }
+
+    public void PlaySound()
+    {
+        
+    }
 }

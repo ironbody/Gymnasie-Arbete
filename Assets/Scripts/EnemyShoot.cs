@@ -12,13 +12,17 @@ public class EnemyShoot : MonoBehaviour
 
     private float nextTimeToFire;
 
-    
+    private float randomTime;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         EnemyMove.AddEnemy(this.gameObject);
-  
+
+        randomTime = Random.Range(0f, 1f);
+
 
     }
 
@@ -29,7 +33,7 @@ public class EnemyShoot : MonoBehaviour
         {
             if (Time.time >= nextTimeToFire)
             {
-                nextTimeToFire = Time.time + waitTime;
+                nextTimeToFire = Time.time + waitTime + randomTime;
                 Shoot();
             }
         }
