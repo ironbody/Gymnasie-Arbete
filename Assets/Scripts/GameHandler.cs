@@ -50,6 +50,11 @@ public class GameHandler : MonoBehaviour
         paused = false;
         won = false;
         currentWave = 0;
+        enemiesKilled = 0;
+        spawningWave = false;
+
+        health = 3;
+
         Resume();
 
         hearts = new List<GameObject>();
