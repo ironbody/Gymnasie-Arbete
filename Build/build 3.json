@@ -1,0 +1,16 @@
+{
+"companyName": "ironbody",
+"productName": "Gymnasie-Arbete",
+"productVersion": "0.1",
+"dataUrl": "build 3.data.unityweb",
+"wasmCodeUrl": "build 3.wasm.code.unityweb",
+"wasmFrameworkUrl": "build 3.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.2.13f1"
+}
